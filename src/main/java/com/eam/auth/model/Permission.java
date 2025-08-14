@@ -1,5 +1,6 @@
 package com.eam.auth.model;
 
+import com.eam.util.AuditEntityListener;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EntityListeners(AuditEntityListener.class)
 public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

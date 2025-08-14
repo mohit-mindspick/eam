@@ -33,5 +33,6 @@ public class Location {
 
     // Child locations
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Builder.Default
     private Set<Location> children = new HashSet<>();
 }
