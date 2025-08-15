@@ -1,6 +1,0 @@
-2025-08-14 23:06:16,681 INFO  CREATE - {"id":1,"code":"USER_CREATE","name":"Create User","description":"Allows the creation of new users in the system"}
-2025-08-14 23:06:16,683 INFO  CREATE - {"id":2,"code":"USER_UPDATE","name":"Update User","description":"Allows editing user information"}
-2025-08-14 23:06:16,683 INFO  CREATE - {"id":3,"code":"USER_DELETE","name":"Delete User","description":"Allows deleting existing users from the system"}
-2025-08-14 23:06:16,684 INFO  CREATE - {"id":4,"code":"CLIENT_VIEW","name":"View Clients","description":"Allows viewing client information"}
-2025-08-14 23:06:16,684 INFO  CREATE - {"id":5,"code":"REPORT_VIEW","name":"View Reports","description":"View analytics and reports"}
-2025-08-14 23:06:16,684 INFO  CREATE - {"id":6,"code":"DASHBOARD_VIEW","name":"View Dashboards","description":"View analytics and dasboard"}

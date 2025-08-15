@@ -99,8 +99,18 @@ public class UserService {
     }
 
     // Search by email
-    public User findByEmail(String phoneNumber) {
-        return userRepository.findByEmail(phoneNumber).orElseThrow(() -> new RuntimeException("User not found"));
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    //Search by Username
+    public User findByUsername(String username) {
+        User user =  userRepository.findByUsername(username).get();
+        if(null == user)
+            user = userRepository.findByEmail(username).get();
+        if(null == user)
+            user = userRepository.findByPhoneNumber(username).get();
+        return user;
     }
 
     // Role assignment

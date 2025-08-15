@@ -1,6 +1,5 @@
 package com.eam.auth.model;
 
-import com.eam.location.model.Location;
 import jakarta.persistence.*;
 import lombok.*;
 

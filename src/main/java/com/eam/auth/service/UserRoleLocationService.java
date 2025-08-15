@@ -6,8 +6,8 @@ import com.eam.auth.model.UserRoleLocation;
 import com.eam.auth.repository.UserRoleLocationRepository;
 import com.eam.auth.repository.UserRepository;
 import com.eam.auth.repository.RoleRepository;
-import com.eam.location.model.Location;
-import com.eam.location.repository.LocationRepository;
+import com.eam.auth.model.Location;
+import com.eam.auth.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

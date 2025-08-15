@@ -33,6 +33,11 @@ public class RoleService {
                 .orElseThrow(() -> new RuntimeException("Role not found"));
     }
 
+    public Role getRoleByCode(String code) {
+        return roleRepository.findByCode(code)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+    }
+
     public Role createRole(Role role) {
         if(null == role.getRoleType())
             role.setRoleType(RoleType.STANDARD);
@@ -87,6 +92,19 @@ public class RoleService {
         Set<Permission> effectivePermissions = new HashSet<>(role.getDirectPermissions());
         for (Feature feature : role.getFeatures()) {
             effectivePermissions.addAll(feature.getPermissions());
+        }
+        return effectivePermissions;
+    }
+
+    public Set<String> getEffectivePermissionsByRoleCode(String code) {
+        Role role = getRoleByCode(code);
+        Set<Permission> allPermissions = new HashSet<>(role.getDirectPermissions());
+        for (Feature feature : role.getFeatures()) {
+            allPermissions.addAll(feature.getPermissions());
+        }
+        Set<String> effectivePermissions = new HashSet<String>();
+        for(Permission permission : allPermissions){
+            effectivePermissions.add(permission.getCode());
         }
         return effectivePermissions;
     }

@@ -1,6 +1,5 @@
 package com.eam.auth.model;
 
-import com.eam.client.model.Client;
 import jakarta.persistence.*;
 import lombok.*;
 

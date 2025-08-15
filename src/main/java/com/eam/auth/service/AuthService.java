@@ -1,9 +1,12 @@
 package com.eam.auth.service;
 
 import com.eam.auth.model.PasswordResetToken;
+import com.eam.auth.model.Permission;
+import com.eam.auth.model.Role;
 import com.eam.auth.model.User;
 import com.eam.auth.repository.PasswordResetTokenRepository;
 import com.eam.auth.repository.UserRepository;
+import com.eam.auth.security.JwtUtil;
 import com.eam.auth.utils.JwtService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +19,7 @@ import org.springframework.stereotype.Service;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
@@ -30,7 +31,7 @@ public class AuthService {
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final JwtService jwtService;
+    private final JwtUtil jwtUtil;
     private final EmailService emailService;
 
     // OTP related fields
@@ -41,11 +42,22 @@ public class AuthService {
     public String login(String username, String password) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password));
-        return jwtService.generateJwtToken(username);
+        return generateJwtToken(username);
+
     }
 
-    public String loginWithPhoneNumberAndOTP(String username, String password) {
-        return jwtService.generateJwtToken(username);
+    private String generateJwtToken(String username){
+        User user = userService.findByUsername(username);
+
+        Set<Role> userRoles = user.getRoles();
+        List<String> roles = new ArrayList<>();
+        for(Role role: userRoles)
+            roles.add(role.getCode());
+        Set<Permission> userPermissions = user.getDirectPermissions();
+        List<String> permissions = new ArrayList<>();
+        for(Permission permission: userPermissions)
+            permissions.add(permission.getCode());
+        return jwtUtil.generateToken(user.getUsername(), roles, permissions);
     }
 
     // OTP Methods
@@ -90,7 +102,7 @@ public class AuthService {
             log.info("OTP verified successfully for phone number: {}", phoneNumber);
             // Remove OTP from cache after successful verification
             otpCache.remove(phoneNumber);
-            return jwtService.generateJwtToken(user.getUsername());
+            return generateJwtToken(phoneNumber);
         } else {
             log.warn("Invalid OTP provided for phone number: {}", phoneNumber);
         }
