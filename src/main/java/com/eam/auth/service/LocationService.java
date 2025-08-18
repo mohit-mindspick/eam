@@ -27,7 +27,7 @@ public class LocationService {
     public Location updateLocation(Long id, Location updatedLocation) {
         Location existing = getLocationById(id);
         existing.setName(updatedLocation.getName());
-        existing.setClientId(updatedLocation.getClientId());
+        existing.setTenantId(updatedLocation.getTenantId());
         existing.setParent(updatedLocation.getParent());
         return locationRepository.save(existing);
     }
@@ -41,20 +41,20 @@ public class LocationService {
                 .orElseThrow(() -> new RuntimeException("Location not found"));
     }
 
-    public List<Location> getAllLocations(Long clientId) {
-        return locationRepository.findByClientId(clientId);
+    public List<Location> getAllLocations(Long tenantId) {
+        return locationRepository.findByTenantId(tenantId);
     }
 
     @Transactional(readOnly = true)
-    public Location getLocationTree(Long clientId, Long parentId) {
-        List<Object[]> flatList = locationRepository.findLocationTree(clientId, parentId);
+    public Location getLocationTree(Long tenantId, Long parentId) {
+        List<Object[]> flatList = locationRepository.findLocationTree(tenantId, parentId);
 
         Map<Long, Location> locationMap = new HashMap<>();
         for (Object[] row : flatList) {
             Location loc = new Location();
             loc.setId(((Number) row[0]).longValue());
             loc.setName((String) row[1]);
-            loc.setClientId(((Number) row[2]).longValue());
+            loc.setTenantId(((Number) row[2]).longValue());
             locationMap.put(loc.getId(), loc);
         }
 

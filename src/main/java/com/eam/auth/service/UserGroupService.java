@@ -28,8 +28,8 @@ public class UserGroupService {
                 .orElseThrow(() -> new EntityNotFoundException("UserGroup not found with id " + id));
     }
 
-    public List<UserGroup> getUserGroupsByClient(Long clientId) {
-        return userGroupRepository.findByClientId(clientId);
+    public List<UserGroup> getUserGroupsByTenant(Long tenantId) {
+        return userGroupRepository.findByTenantId(tenantId);
     }
 
     public UserGroup createUserGroup(UserGroup userGroup) {
@@ -41,7 +41,7 @@ public class UserGroupService {
             group.setName(updatedGroup.getName());
             group.setDescription(updatedGroup.getDescription());
             group.setActive(updatedGroup.isActive());
-            group.setClient(updatedGroup.getClient());
+            group.setTenant(updatedGroup.getTenant());
             group.setUsers(updatedGroup.getUsers());
             return userGroupRepository.save(group);
         }).orElseThrow(() -> new RuntimeException("User group not found"));

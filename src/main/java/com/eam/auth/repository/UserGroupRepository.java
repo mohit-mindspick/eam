@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserGroupRepository extends JpaRepository<UserGroup, Long> {
-    List<UserGroup> findByClientId(Long clientId);
+    List<UserGroup> findByTenantId(Long tenantId);
     Optional<UserGroup> findByName(String name);
 }

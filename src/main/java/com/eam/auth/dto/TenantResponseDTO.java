@@ -8,15 +8,15 @@ import java.util.List;
 
 @Data
 @Builder
-public class ClientResponseDTO {
+public class TenantResponseDTO {
     private Long id;
-    private String clientName;
+    private String tenantName;
     private String subscriptionName;
     private String subscriptionCode;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String clientId;
-    private String clientCode;
+    private String tenantId;
+    private String tenantCode;
     private String adminEmail;
     private Integer licenses;
     private String adminPhoneNumber;
@@ -24,6 +24,6 @@ public class ClientResponseDTO {
     private String industryName;
     private String industryCode;
     private List<String> featuresEnabled;
-    private String parentClientName;
-    private String parentClientCode;
+    private String parentTenantName;
+    private String parentTenantCode;
 }

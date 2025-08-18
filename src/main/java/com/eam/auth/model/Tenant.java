@@ -7,22 +7,22 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "clients")
+@Table(name = "tenants")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Client {
+public class Tenant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "client_code", nullable = false, length = 4, unique = true)
-    private String clientCode;
+    @Column(name = "tenant_code", nullable = false, length = 4, unique = true)
+    private String tenantCode;
 
     @Column(nullable = false)
-    private String clientName;
+    private String tenantName;
 
     private LocalDate startDate;
 
@@ -40,13 +40,13 @@ public class Client {
     private String logo;
 
     @ElementCollection
-    @CollectionTable(name = "client_features", joinColumns = @JoinColumn(name = "id"))
+    @CollectionTable(name = "tenant_features", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "feature")
     private List<String> featuresEnabled;
 
     @ManyToOne
-    @JoinColumn(name = "parent_client_id")
-    private Client parentClient;
+    @JoinColumn(name = "parent_tenant_id")
+    private Tenant parentTenant;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "industry_id", nullable = false)

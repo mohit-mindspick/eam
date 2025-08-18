@@ -22,9 +22,9 @@ public class Location {
     @Column(nullable = false)
     private String name;
 
-    // Client-specific
+    // Tenant-specific
     @Column(nullable = false)
-    private Long clientId;
+    private Long tenantId;
 
     // Parent relationship
     @ManyToOne(fetch = FetchType.LAZY)

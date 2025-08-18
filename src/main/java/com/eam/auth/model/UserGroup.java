@@ -27,10 +27,10 @@ public class UserGroup {
     @Builder.Default
     private boolean active = true;
 
-    // Many groups can belong to one client
+    // Many groups can belong to one tenant
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+    @JoinColumn(name = "tenant_id", nullable = false)
+    private Tenant tenant;
 
     // A group can have many users
     @ManyToMany(fetch = FetchType.LAZY)

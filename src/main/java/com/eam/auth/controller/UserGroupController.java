@@ -25,9 +25,9 @@ public class UserGroupController {
         return ResponseEntity.ok(userGroupService.getUserGroupById(id));
     }
 
-    @GetMapping("/client/{clientId}")
-    public List<UserGroup> getGroupsByClient(@PathVariable Long clientId) {
-        return userGroupService.getUserGroupsByClient(clientId);
+    @GetMapping("/tenant/{tenantId}")
+    public List<UserGroup> getGroupsByTenant(@PathVariable Long tenantId) {
+        return userGroupService.getUserGroupsByTenant(tenantId);
     }
 
     @PostMapping

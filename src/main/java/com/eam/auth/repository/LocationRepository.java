@@ -11,17 +11,17 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 
     @Query(value = """
         WITH RECURSIVE location_tree AS (
-            SELECT l.id, l.name, l.client_id, l.parent_id
+            SELECT l.id, l.name, l.tenant_id, l.parent_id
             FROM locations l
-            WHERE l.id = :parentId AND l.client_id = :clientId
+            WHERE l.id = :parentId AND l.tenant_id = :tenantId
             UNION ALL
-            SELECT child.id, child.name, child.client_id, child.parent_id
+            SELECT child.id, child.name, child.tenant_id, child.parent_id
             FROM locations child
             INNER JOIN location_tree lt ON lt.id = child.parent_id
         )
         SELECT * FROM location_tree
         """, nativeQuery = true)
-    List<Object[]> findLocationTree(Long clientId, Long parentId);
+    List<Object[]> findLocationTree(Long tenantId, Long parentId);
 
     @Query(value = """
         WITH RECURSIVE location_tree AS (
@@ -37,5 +37,5 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
         """, nativeQuery = true)
     List<Location> findLocationTree(@Param("parentId") Long parentId);
 
-    List<Location> findByClientId(Long clientId);
+    List<Location> findByTenantId(Long tenantId);
 }
