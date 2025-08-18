@@ -9,8 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EntityScan(basePackages = {"com.eam.auth.model", "com.eam.issue.model", "com.eam.i18n.model"})
+@EnableJpaRepositories(basePackages = {"com.eam.auth.repository", "com.eam.issue.repository", "com.eam.i18n.repository"})
 @OpenAPIDefinition(
     info = @Info(
         title = "Enterprise Asset Management (EAM) API",

@@ -1,0 +1,215 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+*.bin
+*.lock
+*.probe
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+*.temp
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Spring Boot
+*.log
+logs/
+application-*.properties
+!application-example.properties
+!application-test.properties
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+*.h2.db
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Node.js (if using frontend tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Application specific
+# Exclude any sensitive configuration files
+application-prod.properties
+application-dev.properties
+application-local.properties
+
+# Exclude any generated files
+generated/
+temp/
+tmp/
+
+# Exclude any backup files
+*.bak
+*.backup
+*.old
+
+# Exclude any lock files (except gradle wrapper)
+*.lock
+!gradle/wrapper/gradle-wrapper.jar
+
+# Exclude any coverage reports
+coverage/
+*.lcov
+
+# Exclude any test reports
+test-results/
+reports/
+
+# Exclude any local configuration
+local.properties
+local.yml
+local.yaml
+
+# Exclude any certificates and keys
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Exclude any archives
+*.zip
+*.tar.gz
+*.rar
+
+# Exclude any temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Exclude any IDE specific files
+.project
+.classpath
+.settings/
+.metadata/
+*.launch
+
+# Exclude any OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Exclude any application specific directories that shouldn't be in version control
+uploads/
+downloads/
+cache/
+temp/
+tmp/
+
+# EAM Project specific exclusions
+# Exclude logs directory (contains audit logs)
+logs/
+
+# Exclude libs directory (contains external JARs that should be managed by build system)
+libs/
+
+# Exclude META-INF auto-configuration files (these are generated during build)
+META-INF/org.springframework.boot.autoconfigure.AutoConfiguration.imports
+
+# Exclude any local database files
+*.h2.db
+*.db
+
+# Exclude any application-specific temporary files
+*.pid
+*.port

@@ -1,5 +1,6 @@
 package com.eam.auth.model;
 
+import com.eam.i18n.annotation.Localized;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class Industry {
     @Column(nullable = false, unique = true, length = 20)
     private String industryCode;
 
+    @Localized
     @Column(nullable = false, length = 100)
     private String name;
 }
