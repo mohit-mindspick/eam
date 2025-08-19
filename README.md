@@ -12,9 +12,61 @@ A comprehensive Spring Boot application for managing enterprise assets, inventor
 - **JWT Authentication**: Secure API access with JSON Web Tokens
 - **RESTful APIs**: Comprehensive REST endpoints for all operations
 
-## 🏗️ Architecture
+## 🗄️ Database Configuration
 
-### Core Components
+The EAM project supports multiple database configurations using Spring profiles:
+
+### Available Profiles
+
+1. **H2 Profile** (`h2`) - In-memory database for development and testing
+   - Fast startup and no external dependencies
+   - Data is lost when application stops
+   - Includes H2 console for database inspection
+
+2. **PostgreSQL Profile** (`postgres`) - Production-ready database
+   - Persistent data storage
+   - Better performance for large datasets
+   - Connection pooling and optimization
+
+3. **Development Profile** (`dev`) - H2 with enhanced logging
+   - Includes SQL query logging
+   - Debug information for development
+
+4. **Production Profile** (`prod`) - PostgreSQL with optimized settings
+   - Reduced logging for better performance
+   - Security hardening
+
+### Database Setup
+
+#### PostgreSQL Setup with Docker
+```bash
+# Start PostgreSQL container
+docker-compose up -d postgres
+
+# Check if PostgreSQL is running
+docker-compose ps
+```
+
+#### Manual PostgreSQL Setup
+1. Install PostgreSQL on your system
+2. Create a database named `eam`
+3. Update connection details in `application-postgres.properties`
+
+### Database Access
+
+#### H2 Console (when using H2 profile)
+- URL: `http://localhost:8080/h2-console`
+- JDBC URL: `jdbc:h2:mem:testdb`
+- Username: `sa`
+- Password: `password`
+
+#### PostgreSQL Connection
+- Host: `localhost:5434`
+- Database: `eam`
+- Username: `postgres`
+- Password: `password`
+
+## 🏗️ Architecture
 - **Tenant Management**: Multi-tenant support with organization isolation
 - **User & Role Management**: Hierarchical role-based access control
 - **Industry Management**: Industry classification for tenants
@@ -52,8 +104,35 @@ cd eam
 ```
 
 ### 3. Run the Application
+
+#### Option 1: H2 Database (Default - In-Memory)
 ```bash
-./gradlew bootRun
+./run-h2.sh
+# or
+./gradlew bootRun --args='--spring.profiles.active=h2'
+```
+
+#### Option 2: PostgreSQL Database (Production)
+```bash
+# Start PostgreSQL with Docker
+docker-compose up -d postgres
+
+# Run the application
+./run-postgres.sh
+# or
+./gradlew bootRun --args='--spring.profiles.active=postgres'
+```
+
+#### Option 3: Development Mode (H2 with enhanced logging)
+```bash
+./run-dev.sh
+# or
+./gradlew bootRun --args='--spring.profiles.active=dev'
+```
+
+#### Option 4: Production Mode (PostgreSQL with optimized settings)
+```bash
+./gradlew bootRun --args='--spring.profiles.active=prod'
 ```
 
 The application will start on `http://localhost:8080`
@@ -226,11 +305,20 @@ public ResponseEntity<Permission> createPermission(@RequestBody Permission permi
 
 ## 🗄️ Database
 
-### Development Database
+### Database Options
+
+#### H2 Database (Development/Testing)
 - **Type**: H2 In-Memory Database
 - **Console**: `http://localhost:8080/h2-console`
 - **JDBC URL**: `jdbc:h2:mem:testdb`
 - **Username**: `sa`
+- **Password**: `password`
+
+#### PostgreSQL Database (Production)
+- **Type**: PostgreSQL Persistent Database
+- **Host**: `localhost:5434`
+- **Database**: `eam`
+- **Username**: `postgres`
 - **Password**: `password`
 
 ### Schema
@@ -257,7 +345,15 @@ eam/
 │   └── util/           # Utility classes
 ├── src/main/resources/
 │   ├── application.properties
+│   ├── application-h2.properties
+│   ├── application-postgres.properties
+│   ├── application-dev.properties
+│   ├── application-prod.properties
 │   └── schema.sql
+├── docker-compose.yml
+├── run-h2.sh
+├── run-postgres.sh
+├── run-dev.sh
 ├── test-tenant-api.sh          # Comprehensive API tests
 ├── test-tenant-api-simple.sh   # Simplified API tests
 └── README.md
